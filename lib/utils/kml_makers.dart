@@ -1,4 +1,5 @@
 class KMLMakers {
+  //Lg logo to the left screen
   static String screenOverlayImage(String imageUrl, double x, double y) {
     return '''<?xml version="1.0" encoding="UTF-8"?>
       <kml xmlns="http://www.opengis.net/kml/2.2">

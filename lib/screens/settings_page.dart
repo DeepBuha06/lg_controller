@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../connections/ssh.dart';
 
-class SettingsPage extends StatefulWidget {
+class SettingsPage extends StatefulWidget {//this screen is going to change -> adding text in the box, loading spinner.
   const SettingsPage({super.key});
 
   @override
@@ -15,7 +15,7 @@ class _SettingsPageState extends State<SettingsPage> {
   final _password = TextEditingController();
   final _port = TextEditingController();
 
-  bool _loading = false;
+  bool _loading = false; // to avoid multiple clicks by user and crashing the app.
 
   @override
   void initState() {
@@ -24,7 +24,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   @override
-  void dispose() {
+  void dispose() { //to have no memory leak
     for (var c in [_ip, _username, _password, _port]) {
       c.dispose();
     }
@@ -32,7 +32,7 @@ class _SettingsPageState extends State<SettingsPage> {
   }
 
   Future<void> _loadSettings() async {
-    final prefs = await SharedPreferences.getInstance();
+    final prefs = await SharedPreferences.getInstance(); //phone storage
     setState(() {
       _ip.text = prefs.getString('ipAddress') ?? '';
       _username.text = prefs.getString('username') ?? 'lg';
@@ -55,7 +55,7 @@ class _SettingsPageState extends State<SettingsPage> {
 
     setState(() => _loading = false);
 
-    if (mounted) {
+    if (mounted) { //cheking if the setting page exist or not.
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(result ? 'Connected!' : 'Connection Failed'),
@@ -65,6 +65,7 @@ class _SettingsPageState extends State<SettingsPage> {
     }
   }
 
+  //UI
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -90,7 +91,6 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 
-  // Simplified Helper
   Widget _input(TextEditingController controller, String label, {bool obscure = false, TextInputType type = TextInputType.text}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),

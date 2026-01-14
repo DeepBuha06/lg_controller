@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:io';
 import 'package:dartssh2/dartssh2.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -16,6 +15,7 @@ class SSH {
     final username = prefs.getString('username') ?? 'lg';
     final password = prefs.getString('password') ?? 'lg';
 
+    //checking if the connection is already there or not.
     if (_client?.isClosed == false) return true;
 
     try {
@@ -49,9 +49,8 @@ class SSH {
   }
 
   Future<void> loadKmlViaTxt(String filename) async {
-    // FIX: Use the cached _host. If null, connect first to get it.
     if (_host == null) await connect();
-    if (_host == null) return; // If still null, we can't proceed
+    if (_host == null) return;
 
     String url = "http://$_host:81/kml/$filename";
     await execute("echo '$url' > /var/www/html/kmls.txt");

@@ -32,9 +32,9 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           children: [
             GridView.count(
-              shrinkWrap: true,
+              shrinkWrap: true, //avoiding infinite height
               physics: const NeverScrollableScrollPhysics(),
-              crossAxisCount: 2,
+              crossAxisCount: 2, //making 2 colums
               crossAxisSpacing: 20,
               mainAxisSpacing: 20,
               children: [
@@ -52,7 +52,6 @@ class _HomeScreenState extends State<HomeScreen> {
                   label: 'Show Pyramid',
                   color: Colors.orangeAccent,
                   onTap: () async {
-                    // FIX: Logic moved to SSH class
                     await ssh.setPyramid(
                         KMLMakers.pyramid(),
                         KMLMakers.lookAt(23.2156, 72.6369, 5000, 45, 0)
@@ -75,7 +74,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 15),
             Row(
               children: [
-                Expanded(
+                Expanded( //spliting the screen in 50/50
                   child: _buildCard(
                     icon: Icons.clear,
                     label: 'Clean Logo',
@@ -105,12 +104,14 @@ class _HomeScreenState extends State<HomeScreen> {
       elevation: 5,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
       color: color,
-      child: InkWell(
+      child: InkWell( //to convert the image to a clickable button
         onTap: onTap,
         borderRadius: BorderRadius.circular(15),
+        //ui
         child: Container(
           height: 120,
           padding: const EdgeInsets.all(8.0),
+          //layout
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
