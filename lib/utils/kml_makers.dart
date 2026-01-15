@@ -19,7 +19,7 @@ class KMLMakers {
   }
 
   static String pyramid() {
-    //lat is the center
+    //lat, lon is the center
     double lat = 23.2156;
     double lon = 72.6369;
     //dimension
